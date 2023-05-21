@@ -1,14 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { MantineProvider, createEmotionCache } from "@mantine/core";
+import rtlPlugin from "stylis-plugin-rtl";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rtlCache = createEmotionCache({
+  key: "mantine-rtl",
+  stylisPlugins: [rtlPlugin],
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <MantineProvider
+    withGlobalStyles
+    withNormalizeCSS
+    emotionCache={rtlCache}
+    theme={{ dir: "rtl" }}
+  >
     <App />
-  </React.StrictMode>
+  </MantineProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
